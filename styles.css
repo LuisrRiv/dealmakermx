@@ -37,10 +37,10 @@ html.lenis, html.lenis body { height:auto; }
 
 /* ── Scroll Progress Bar ── */
 .scroll-progress {
-  position:fixed; top:0; left:0; height:3px;
+  position:fixed; top:0; left:0; height:4px;
   background:linear-gradient(90deg, var(--blue), var(--blue-light));
   width:0%; z-index:9999;
-  box-shadow:0 0 10px var(--blue-glow);
+  box-shadow:0 0 15px var(--blue-glow);
   transition:width 0.1s ease-out;
 }
 
