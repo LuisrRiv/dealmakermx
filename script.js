@@ -29,7 +29,7 @@ const observer = new IntersectionObserver((entries) => {
 fadeEls.forEach(el => observer.observe(el));
 
 // ── Contact form ──
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzXYB2XlM-2w2wSvm4XOw7UVZtAh9CdY5VmZo8LjBihhFseQyzr8f8Iw4QunLH9KK0/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzs-nJmMnKSNW11aFLVOScZ0yV0EMstAg9S276MEygajafjG46Bwmu1D3ghMkpQcpE/exec';
 
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
@@ -119,7 +119,7 @@ const chatInput = document.getElementById('chatInput');
 const chatMessages = document.getElementById('chatMessages');
 
 // TODO: Reemplazar con la URL del nuevo Webhook del Chatbot en Google Apps Script
-const AI_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzs-nJmMnKSNW11aFLVOScZ0yV0EMstAg9S276MEygajafjG46Bwmu1D3ghMkpQcpE/exec';
+const AI_WEBHOOK_URL = 'URL_CHAT_IA_AQUI';
 
 mascotToggle.addEventListener('click', () => {
   chatWindow.classList.add('active');
