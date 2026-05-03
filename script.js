@@ -29,7 +29,7 @@ const observer = new IntersectionObserver((entries) => {
 fadeEls.forEach(el => observer.observe(el));
 
 // ── Contact form ──
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzs-nJmMnKSNW11aFLVOScZ0yV0EMstAg9S276MEygajafjG46Bwmu1D3ghMkpQcpE/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf-wYKiK7y7j_-nOIHJo1Fe41NhLjpUV5sg3KM_ve3LoqIeaC8e-6cKejhLn0Go4w/exec';
 
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
