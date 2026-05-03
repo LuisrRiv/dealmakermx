@@ -109,3 +109,78 @@ const heroObserver = new IntersectionObserver((entries) => {
   }
 }, { threshold: 0.3 });
 heroObserver.observe(document.querySelector('.hero-stats'));
+
+// ── AI Chat Logic ──
+const mascotToggle = document.getElementById('mascotToggle');
+const chatWindow = document.getElementById('chatWindow');
+const closeChat = document.getElementById('closeChat');
+const aiChatForm = document.getElementById('aiChatForm');
+const chatInput = document.getElementById('chatInput');
+const chatMessages = document.getElementById('chatMessages');
+
+// TODO: Reemplazar con la URL del nuevo Webhook del Chatbot en Google Apps Script
+const AI_WEBHOOK_URL = 'URL_CHAT_IA_AQUI';
+
+mascotToggle.addEventListener('click', () => {
+  chatWindow.classList.add('active');
+  mascotToggle.style.display = 'none';
+  chatInput.focus();
+});
+
+closeChat.addEventListener('click', () => {
+  chatWindow.classList.remove('active');
+  mascotToggle.style.display = 'block';
+});
+
+function appendMessage(text, sender) {
+  const msgDiv = document.createElement('div');
+  msgDiv.className = `message ${sender}-message fade-up`;
+  msgDiv.textContent = text;
+  chatMessages.appendChild(msgDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function appendTypingIndicator() {
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'typing-indicator';
+  typingDiv.id = 'typingIndicator';
+  typingDiv.innerHTML = '<span></span><span></span><span></span>';
+  chatMessages.appendChild(typingDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function removeTypingIndicator() {
+  const typingDiv = document.getElementById('typingIndicator');
+  if (typingDiv) typingDiv.remove();
+}
+
+aiChatForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const userText = chatInput.value.trim();
+  if (!userText) return;
+
+  // Mostrar mensaje del usuario
+  appendMessage(userText, 'user');
+  chatInput.value = '';
+  
+  // Mostrar indicador de que el bot está escribiendo
+  appendTypingIndicator();
+
+  try {
+    const formData = new FormData();
+    formData.append('message', userText);
+
+    const response = await fetch(AI_WEBHOOK_URL, {
+      method: 'POST',
+      body: formData
+    });
+    
+    const result = await response.text();
+    removeTypingIndicator();
+    appendMessage(result, 'bot');
+  } catch (error) {
+    console.error('Error in AI Chat:', error);
+    removeTypingIndicator();
+    appendMessage('Lo siento, tuve un problema de conexión. ¿Puedes intentar de nuevo?', 'bot');
+  }
+});

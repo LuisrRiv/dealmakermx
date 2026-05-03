@@ -323,12 +323,34 @@
     </div>
   </footer>
 
-  <!-- Floating Mascot Guide -->
-  <div class="floating-mascot">
-    <div class="mascot-bubble">
-      ¿Necesitas ayuda? ¡Contáctame!
+  <!-- Floating Mascot Guide & AI Chat -->
+  <div class="chat-wrapper">
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <img src="mascota-3.png" alt="Avatar">
+        <div>
+          <h4>Castor IA</h4>
+          <p>Asistente virtual de DealMaker</p>
+        </div>
+        <button class="close-chat" id="closeChat">✕</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message fade-up">
+          ¡Hola! Soy el Castor IA 🦫. Puedo ayudarte con dudas sobre Infonavit, compra, venta o avalúos. ¿En qué te asesoro hoy?
+        </div>
+      </div>
+      <form class="chat-input-area" id="aiChatForm">
+        <input type="text" id="chatInput" placeholder="Escribe tu mensaje..." required autocomplete="off">
+        <button type="submit" aria-label="Enviar mensaje">➤</button>
+      </form>
     </div>
-    <img src="mascota-3.png" alt="Guía Castor">
+
+    <div class="floating-mascot" id="mascotToggle">
+      <div class="mascot-bubble">
+        ¿Necesitas ayuda? ¡Contáctame!
+      </div>
+      <img src="mascota-3.png" alt="Guía Castor">
+    </div>
   </div>
 
   <script src="script.js"></script>
