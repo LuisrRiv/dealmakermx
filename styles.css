@@ -389,19 +389,28 @@ body {
 }
 
 /* ── Mascot Guides ── */
-.mascot-badge {
-  position:absolute; bottom:20px; right:-20px;
-  background:var(--dark-card); border:1px solid var(--blue);
-  border-radius:24px; padding:12px; display:flex; align-items:center; gap:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.5); z-index:10;
-  max-width:280px;
+.hero-mascot-large {
+  position:absolute; bottom:-40px; left:-120px;
+  width:320px; height:auto; z-index:10;
+  border-radius:20px;
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,0.6));
 }
-.mascot-badge img {
-  width:64px; height:64px; border-radius:50%; object-fit:cover;
-  border:2px solid var(--blue); box-shadow:0 0 10px var(--blue-glow);
+.hero-mascot-speech {
+  position:absolute; bottom:140px; left:-160px;
+  background:var(--blue); color:#fff;
+  padding:16px 24px; border-radius:24px 24px 24px 0;
+  font-weight:600; font-size:1.05rem;
+  box-shadow:0 12px 30px var(--blue-glow);
+  z-index:11; max-width:260px; text-align:center;
 }
-.mascot-speech {
-  font-size:0.9rem; font-weight:500; line-height:1.4; color:var(--white);
+.hero-mascot-speech::after {
+  content:''; position:absolute; bottom:-12px; left:0;
+  border-width:12px 16px 0 0; border-style:solid;
+  border-color:var(--blue) transparent transparent transparent;
+}
+@media(max-width:1024px) {
+  .hero-mascot-large { width:220px; left:-40px; bottom:-20px; }
+  .hero-mascot-speech { left:-60px; bottom:100px; font-size:0.9rem; padding:12px 18px; max-width:200px; }
 }
 
 .mascot-header { position:relative; }
