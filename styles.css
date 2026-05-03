@@ -226,11 +226,18 @@ body {
 
 /* ── Testimonials ── */
 .testimonials { background:var(--dark); position:relative; }
-.testimonial-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+.carousel-container { position:relative; overflow:hidden; width:100%; max-width:800px; margin:0 auto; padding-bottom:10px; }
+.carousel-track { display:flex; transition:transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
 .testimonial-card {
+  flex:0 0 100%;
   background:var(--dark-card); border:1px solid var(--dark-border);
-  border-radius:var(--radius); padding:36px; transition:var(--transition);
+  border-radius:var(--radius); padding:40px; transition:var(--transition);
+  box-sizing:border-box;
 }
+.carousel-dots { display:flex; justify-content:center; gap:10px; margin-top:30px; }
+.dot { width:12px; height:12px; border-radius:50%; background:var(--dark-border); cursor:pointer; transition:0.3s; }
+.dot:hover { background:var(--gray); }
+.dot.active { background:var(--blue); transform:scale(1.2); }
 .testimonial-card:hover { border-color:rgba(30,136,200,0.3); transform:translateY(-4px); }
 .stars { color:#F59E0B; font-size:1rem; margin-bottom:16px; letter-spacing:2px; }
 .testimonial-card blockquote {

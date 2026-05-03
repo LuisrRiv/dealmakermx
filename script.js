@@ -189,3 +189,52 @@ aiChatForm.addEventListener('submit', async (e) => {
     appendMessage('Lo siento, tuve un problema de conexión. ¿Puedes intentar de nuevo?', 'bot');
   }
 });
+
+// ── Testimonial Carousel ──
+const track = document.getElementById('testimonialTrack');
+const dots = document.querySelectorAll('.dot');
+let currentSlide = 0;
+let carouselInterval;
+
+if (track && dots.length > 0) {
+  const totalSlides = dots.length;
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[currentSlide].classList.add('active');
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
+  }
+
+  function startCarousel() {
+    carouselInterval = setInterval(nextSlide, 5000); // Cambia cada 5 segundos
+  }
+
+  function stopCarousel() {
+    clearInterval(carouselInterval);
+  }
+
+  // Hacer click en los puntos
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentSlide = index;
+      updateCarousel();
+      stopCarousel();
+      startCarousel(); // Reiniciar el temporizador
+    });
+  });
+
+  // Pausar si el mouse está encima
+  const carouselContainer = document.querySelector('.carousel-container');
+  if (carouselContainer) {
+    carouselContainer.addEventListener('mouseenter', stopCarousel);
+    carouselContainer.addEventListener('mouseleave', startCarousel);
+  }
+
+  // Iniciar
+  startCarousel();
+}
