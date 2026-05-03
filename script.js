@@ -50,6 +50,11 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     body: formData
   })
   .then(response => {
+    // ── Meta Pixel Event ──
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead');
+    }
+
     btn.innerHTML = '✓ ¡Mensaje enviado con éxito!';
     btn.style.background = 'linear-gradient(135deg, #10B981, #059669)';
     btn.classList.remove('btn-pulse');
