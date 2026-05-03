@@ -29,19 +29,50 @@ const observer = new IntersectionObserver((entries) => {
 fadeEls.forEach(el => observer.observe(el));
 
 // ── Contact form ──
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzXYB2XlM-2w2wSvm4XOw7UVZtAh9CdY5VmZo8LjBihhFseQyzr8f8Iw4QunLH9KK0/exec';
+
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const btn = this.querySelector('button[type="submit"]');
+  
+  const form = this;
+  const btn = form.querySelector('button[type="submit"]');
   const originalText = btn.innerHTML;
-  btn.innerHTML = '✓ ¡Mensaje enviado con éxito!';
-  btn.style.background = 'linear-gradient(135deg, #10B981, #059669)';
-  btn.classList.remove('btn-pulse');
-  setTimeout(() => {
-    btn.innerHTML = originalText;
-    btn.style.background = '';
-    btn.classList.add('btn-pulse');
-    this.reset();
-  }, 3000);
+  
+  // Mostrar estado de carga
+  btn.innerHTML = 'Enviando...';
+  btn.style.opacity = '0.7';
+  btn.disabled = true;
+
+  const formData = new FormData(form);
+
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    btn.innerHTML = '✓ ¡Mensaje enviado con éxito!';
+    btn.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+    btn.classList.remove('btn-pulse');
+    btn.style.opacity = '1';
+    
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.style.background = '';
+      btn.classList.add('btn-pulse');
+      btn.disabled = false;
+      form.reset();
+    }, 4000);
+  })
+  .catch(error => {
+    console.error('Error al enviar:', error);
+    btn.innerHTML = '❌ Hubo un error. Intenta de nuevo.';
+    btn.style.background = '#EF4444';
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+  });
 });
 
 // ── Smooth scroll for anchor links ──
