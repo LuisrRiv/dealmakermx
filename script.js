@@ -1,3 +1,33 @@
+// ── Smooth Scroll (Lenis) ──
+if (typeof Lenis !== 'undefined') {
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smooth: true,
+    mouseMultiplier: 1,
+    smoothTouch: false,
+    touchMultiplier: 2,
+    infinite: false,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // ── Scroll Progress Bar ──
+  const scrollProgress = document.getElementById('scrollProgress');
+  lenis.on('scroll', (e) => {
+    if (scrollProgress) {
+      const scrollPercent = (e.scroll / e.limit) * 100;
+      scrollProgress.style.width = scrollPercent + '%';
+    }
+  });
+}
+
 // ── Navbar scroll effect ──
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -21,7 +51,8 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+    } else {
+      entry.target.classList.remove('visible'); // Permite animación bidireccional
     }
   });
 }, { threshold: 0.15 });
