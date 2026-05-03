@@ -119,7 +119,7 @@ const chatInput = document.getElementById('chatInput');
 const chatMessages = document.getElementById('chatMessages');
 
 // TODO: Reemplazar con la URL del nuevo Webhook del Chatbot en Google Apps Script
-const AI_WEBHOOK_URL = 'URL_CHAT_IA_AQUI';
+const AI_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzs-nJmMnKSNW11aFLVOScZ0yV0EMstAg9S276MEygajafjG46Bwmu1D3ghMkpQcpE/exec';
 
 mascotToggle.addEventListener('click', () => {
   chatWindow.classList.add('active');
