@@ -269,3 +269,46 @@ if (track && dots.length > 0) {
   // Iniciar
   startCarousel();
 }
+
+// ── Blog Modal Logic ──
+const blogModal = document.getElementById('blogModal');
+const modalBody = document.getElementById('modalBody');
+const closeBlogModal = document.getElementById('closeBlogModal');
+const readMoreBtns = document.querySelectorAll('.read-more');
+
+if (blogModal && modalBody && closeBlogModal) {
+  readMoreBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const card = btn.closest('.blog-card');
+      const content = card.querySelector('.blog-full-content').innerHTML;
+      
+      modalBody.innerHTML = content;
+      blogModal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Bloquear scroll básico
+      
+      // Si Lenis está activo, pausarlo
+      if (window.lenis) window.lenis.stop();
+    });
+  });
+
+  const closeModalFunc = () => {
+    blogModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (window.lenis) window.lenis.start();
+  };
+
+  closeBlogModal.addEventListener('click', closeModalFunc);
+
+  // Cerrar al hacer click fuera de la ventana
+  blogModal.addEventListener('click', (e) => {
+    if (e.target === blogModal) closeModalFunc();
+  });
+
+  // Cerrar con tecla ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && blogModal.classList.contains('active')) {
+      closeModalFunc();
+    }
+  });
+}
