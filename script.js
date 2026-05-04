@@ -237,3 +237,26 @@ if (blogModal && modalBody && closeBlogModal) {
     }
   });
 }
+
+// ── WhatsApp Widget Logic ──
+const whatsappToggle = document.getElementById('whatsappToggle');
+const whatsappCard = document.getElementById('whatsappCard');
+const closeWA = document.getElementById('closeWA');
+
+if (whatsappToggle && whatsappCard && closeWA) {
+  whatsappToggle.addEventListener('click', () => {
+    whatsappCard.classList.toggle('active');
+  });
+
+  closeWA.addEventListener('click', (e) => {
+    e.stopPropagation();
+    whatsappCard.classList.remove('active');
+  });
+
+  // Cerrar al hacer click fuera
+  document.addEventListener('click', (e) => {
+    if (!whatsappToggle.contains(e.target) && !whatsappCard.contains(e.target)) {
+      whatsappCard.classList.remove('active');
+    }
+  });
+}
